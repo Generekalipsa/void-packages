@@ -1,6 +1,6 @@
 # Template file for 'linux5.8'
 pkgname=linux5.8
-version=5.8.2
+version=5.8.13
 revision=1
 wrksrc="linux-${version}"
 short_desc="Linux kernel and modules (${version%.*} series)"
@@ -8,7 +8,7 @@ maintainer="Leah Neukirchen <leah@vuxu.org>"
 license="GPL-2.0-only"
 homepage="https://www.kernel.org"
 distfiles="https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-${version}.tar.xz"
-checksum=dc9432f97f08b6a0e5f5e0aaf56025c37094acc343f42f65b2919e66f3acb2a1
+checksum=f25936177edd183dd0645dce1d81873bcfc0bab1ff1586df75d95cd12723320d
 python_version=3
 patch_args="-Np1"
 
@@ -289,13 +289,13 @@ do_install() {
 
 	# Remove unneeded architectures
 	case "$arch" in
-		i386|x86_64) _args="arm* p*";;
-		arm|arm64) _args="x86* p*";;
-		powerpc) _args="arm* x86* parisc";;
-		mips) _args="mips* p*";;
+		i386|x86_64) _args="arm* m* p*";;
+		arm|arm64) _args="x86* m* p*";;
+		powerpc) _args="arm* m* x86* parisc";;
+		mips) _args="arm* x86* p*";;
 	esac
 	for arch in alpha avr32 blackfin cris frv h8300 \
-		ia64 m* s* um v850 xtensa ${_args}; do
+		ia64 s* um v850 xtensa ${_args}; do
 		rm -rf ${hdrdest}/arch/${arch}
 	done
 	# Keep arch/x86/ras/Kconfig as it is needed by drivers/ras/Kconfig

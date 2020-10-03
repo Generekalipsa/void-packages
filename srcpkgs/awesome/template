@@ -1,7 +1,7 @@
 # Template file for 'awesome'
 pkgname=awesome
 version=4.3
-revision=7
+revision=8
 build_style=cmake
 build_helper="qemu"
 configure_args="-DSYSCONFDIR=/etc"
@@ -34,6 +34,8 @@ else
 	makedepends+=" lua53-devel lua53-lgi"
 	depends+=" lua53-lgi>=0.7.2"
 fi
+
+CFLAGS="-fcommon"
 
 pre_configure() {
 	# Russian manpages fail to build.
